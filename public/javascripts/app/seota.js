@@ -1,27 +1,42 @@
 Seota = {};
 
 var app = $.sammy(function() {
-  // this.use(Sammy.Cache);
+  this.bind("run", function() { $.ajaxSetup({ "async": false }); });
+
+  this.bind("reset", function() {
+    $("#sitemap").removeData("current-domain");
+    $("#sitemap ul, #details").text("");
+  });
+
+  this.bind("load-sitemap", function(evt, domain) {
+    var current_domain = $("#sitemap").data("current-domain");
+    if (!current_domain || domain != current_domain) {
+      this.trigger('reset');
+      $.getJSON("/analyze/" + domain, function(data) {
+        sitemap = new Seota.Sitemap(domain, data.sitemap);
+        sitemap.render($("#sitemap ul"));
+        $("#details").text("yup yup");
+        $("#sitemap").data("current-domain", domain);
+      });
+    }
+  });
 
   this.get(/^#\/analyze\/([\w.-]+)$/, function() {
     var domain = this.params["splat"][0];
-    $.getJSON("/analyze/" + domain, function(data) {
-      var sitemap = new Seota.Sitemap(domain, data.sitemap);
-      sitemap.render($("#sitemap ul"));
-      $("#details").text("yup yup");
-    });
+    this.trigger('reset');
+    this.trigger("load-sitemap", domain);
   });
 
   this.get(/^#\/analyze\/([\w.-]+)\/page\/(.+)$/, function() {
     var domain = this.params["splat"][0];
     var path = this.params["splat"][1];
+    this.trigger("load-sitemap", domain);
     $.getJSON("/analyze/" + domain + "/page/" + path, function(data) {
       var page = new Seota.Page(data);
       page.render($("#details"));
       $(".density.below_1_percent").hide();
     });
   });
-
 });
 
 $.input_prompt = function(inputElement) {
