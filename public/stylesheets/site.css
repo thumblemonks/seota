@@ -1,12 +1,11 @@
-#content #details .key_value {
-  padding-bottom: 1ex;
-  border-bottom: 1px dotted #cccccc;
-}
+#content #details .failures { color: #cc0000; }
 #content #details label {
   padding: 1ex 0;
   display: block;
   font-weight: bold;
 }
+#content #details .key_value { border-bottom: 1px dotted #cccccc; }
+#content #details .key_value .value { padding: 0.5ex 0 1ex 0; }
 #content #details .density { border-bottom: 1px dotted #dddddd; }
 #content #details .density .percent { text-align: right; }
 #content #details .density .percent:after { content: '%'; }

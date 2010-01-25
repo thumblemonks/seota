@@ -3,12 +3,15 @@ Seota.Page = function(details) {
 };
 
 Seota.Page.prototype = $.extend({}, {
-  _labeled_tag: function(class, label, value) {
+  _labeled_tag: function(class, label, field) {
     var template = "<div class='key_value {{ class }}'>" +
         "<label>{{ label }}</label>" +
+        "<div class='failures'>{{ failures }}</div>" +
         "<div class='value'>{{ value }}</div>" +
       "</div>";
-    return $(Mustache.to_html(template, {"class" : class, "label" : label, "value" : value}));
+    return $(Mustache.to_html(template,
+        {"class" : class, "label" : label, "value" : field.value, "failures" : field.failures.join(", ")}
+      ));
   },
 
   _title_tag: function() {

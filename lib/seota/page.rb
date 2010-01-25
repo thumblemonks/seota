@@ -1,6 +1,20 @@
+require 'whyvalidationssuckin96'
+
 module Seota
   class Page
     attr_reader :uri
+    include WhyValidationsSuckIn96::ValidationSupport
+
+    setup_validations do
+      validates_presence_of :title, :description
+      validates_presence_of :keywords, :message => "were not present"
+      validates_length_of :description, :maximum => 160, :message => "should be no more than 160 characters"
+    end
+
+    def failures_on(attribute)
+      failed_validations.select {|v| v.attribute == attribute }.map(&:message)
+    end
+
     def initialize(url)
       @uri = URI.parse(url)
     end

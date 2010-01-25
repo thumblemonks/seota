@@ -3,8 +3,14 @@
 
 #content {
   #details {
-    .key_value { padding-bottom: 1ex; border-bottom: 1px dotted #ccc; }
+    .failures { color: #c00; }
+
     label { padding: 1ex 0; display: block; font-weight: bold; }
+
+    .key_value {
+      border-bottom: 1px dotted #ccc;
+      .value { padding: .5ex 0 1ex 0; }
+    }
     
     .density {
       .word {}
