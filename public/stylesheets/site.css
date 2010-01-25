@@ -1,3 +1,150 @@
+body { background-color: #edf2fb; }
+.rounded_corners {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.rounded_tight {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.rounded_left {
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+}
+.rounded_right {
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-bottomright: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+}
+.rounded_top {
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+}
+.rounded_bottom {
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+}
+.offset_shadow {
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+}
+.boxy_shadow {
+  -moz-box-shadow: -2px 2px 2px rgba(75, 75, 75, 0.35);
+  -webkit-box-shadow: -2px 2px 2px rgba(75, 75, 75, 0.35);
+}
+.shadow_text { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
+.shadow_text_tight { text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); }
+.border_3d { border-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.25); }
+input {
+  font: 13px/1.5 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.button {
+  display: inline-block;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.25);
+  border: 1px solid;
+  border-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  position: relative;
+}
+.button:active { top: 1px; }
+.button:hover { background-color: #666666; }
+.button.small { font-size: 85%; }
+.button.medium { font-size: 100%; }
+.button.large { font-size: 110%; }
+.button.slate { background-color: #666666; }
+.button.slate:hover { background-color: #555555; }
+.button.blue { background-color: #4183c4; }
+.button.blue:hover { background-color: #3072b3; }
+.button.purple { background-color: #937290; }
+.button.purple:hover { background-color: #82617f; }
+#header {
+  padding: 0.25ex 0;
+  font-size: 200%;
+  color: #222222;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+#choose_domain {
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  background-color: #a483a1;
+  padding: 0.5ex 1em;
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  border-bottom: 2px solid #82617f;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 1px #666666;
+}
+#choose_domain form {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+#choose_domain form input[type=text] {
+  padding: 0.25ex 1ex;
+  width: 20em;
+}
+#domain_info {
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+  background-color: #fffeef;
+  padding: 1ex 1em;
+  margin-bottom: 1em;
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  border: 1px solid;
+  border-color: transparent #bfbeaf #bfbeaf #bfbeaf;
+}
+#content #sitemap {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #cccccc;
+  padding: 1ex;
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  font-size: 90%;
+}
+#content #sitemap ol {
+  margin: 0 0 0 1ex;
+  padding: 0 0 0 1.5em;
+}
+#content #sitemap ol li {
+  margin: 0;
+  padding: 0;
+}
+#content #details {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #cccccc;
+  padding: 1ex;
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+}
 #content #details .failures { color: #cc0000; }
 #content #details label {
   padding: 1ex 0;

@@ -9,18 +9,26 @@
     %link{:rel => "stylesheet", :href => "/stylesheets/site.css", :type => "text/css", :media => "screen", :charset =>"utf-8"}/
   %body
     .container_16
-      #header.grid_16.alpha.omega
-        Seota
-        %form#go_seota
-          %input#domain_name.input_prompt{:type => "text", :value => "www.domain.name"}/
-          %input.button.slate.medium{:type => "submit", :value => "Analyze"}/
+      .grid_16.alpha.omega
+        #header Seota
+
+      .grid_16.alpha.omega
+        #choose_domain
+          Enter Domain:
+          %form#go_seota
+            %input#domain_name.input_prompt{:type => "text", :value => "www.domain.name"}/
+            %input.button.purple.small{:type => "submit", :value => "Analyze"}/
+        #domain_info
+          Information about this domain
 
       #content.grid_16.alpha.omega
-        #sitemap.grid_4.alpha
-          %ul
-            Blah
-        #details.grid_12.omega
-          Site/Page Details
+        .grid_4.alpha
+          #sitemap
+            %ol
+              Sitemap listing
+        .grid_12.omega
+          #details.clearfix
+            Site/Page Details
 
       #footer.grid_16.alpha.omega
         &copy;

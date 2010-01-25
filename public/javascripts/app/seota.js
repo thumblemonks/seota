@@ -8,7 +8,7 @@ var app = $.sammy(function() {
   this.bind("reset", function() {
     $("#sitemap").removeData("current-domain");
     $("#details").data("pages", {});
-    $("#sitemap ul, #details").text("");
+    $("#sitemap ol, #details").text("");
   });
 
   this.bind("load-sitemap", function(evt, domain) {
@@ -17,7 +17,7 @@ var app = $.sammy(function() {
       this.trigger('reset');
       $.getJSON("/analyze/" + domain, function(data) {
         sitemap = new Seota.Sitemap(domain, data.sitemap);
-        sitemap.render($("#sitemap ul"));
+        sitemap.render($("#sitemap ol"));
         $("#details").text("yup yup");
         $("#sitemap").data("current-domain", domain);
       });
