@@ -1,5 +1,7 @@
 require "sinatra"
-require 'haml'
+require "haml"
+require "json"
+require "seota"
 
 module Seota
   class App < Sinatra::Base
@@ -10,11 +12,16 @@ module Seota
     get("/") { haml(:index) }
 
     get %r{^/analyze/([\w.-]+)$} do |domain|
-      "foo #{domain}"
+      sitemap = Sitemap.new(Site.new("http://#{domain}"))
+      content_type 'application/json', :charset => 'utf-8'
+      {:sitemap => sitemap.pages.map(&:path)}.to_json
     end
 
     get %r{^/analyze/([\w.-]+)/page/(.+)$} do |domain, path|
-      "bar #{domain}/#{path}"
+      page = Page.new("http://#{domain}/#{path}")
+      content_type 'application/json', :charset => 'utf-8'
+      {:title => page.title, :description => page.description, :keywords => page.keywords,
+        :single_word_density => page.single_word_density}.to_json
     end
   end # App
 end

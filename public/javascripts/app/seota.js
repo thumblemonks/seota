@@ -3,8 +3,11 @@ var app = $.sammy(function() {
 
   this.get(/^#\/analyze\/([\w.-]+)$/, function() {
     var domain = this.params["splat"][0];
-    $.get("/analyze/" + this.params["domain"], function(data) {
-      $("#sitemap").text(data);
+    $.getJSON("/analyze/" + domain, function(data) {
+      $.each(data.sitemap, function(i, path) {
+        var link = $("<a>").attr("href", "#/analyze/" + domain + "/page" + path).text(path)
+        $("#sitemap ul").append( $("<li>").append(link) );
+      });
       $("#details").text("yup yup");
     });
   });
@@ -12,14 +15,20 @@ var app = $.sammy(function() {
   this.get(/^#\/analyze\/([\w.-]+)\/page\/(.+)$/, function() {
     var domain = this.params["splat"][0];
     var path = this.params["splat"][1];
-    $.get("/analyze/" + domain + "/page/" + path, function(data) {
-      $("#details").text(data);
+    $.getJSON("/analyze/" + domain + "/page/" + path, function(data) {
+      $("#details").empty();
+      $("#details").append($("<div>").text(data.title));
+      // $("#details").append($("<div>").text(data.description));
+      // $("#details").append($("<div>").text(data.keywords));
+      var words_div = $("<div>");
+      for(word in data.single_word_density) {
+        words_div.append($("<div>").text(word + " => " + data.single_word_density[word]));
+      }
+      $("#details").append(words_div);
     });
   });
 
 });
-
-// $.extend(app, {});
 
 $.input_prompt = function(inputElement) {
   inputElement.focus(function() {
