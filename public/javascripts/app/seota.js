@@ -18,6 +18,7 @@ var app = $.sammy(function() {
     $.getJSON("/analyze/" + domain + "/page/" + path, function(data) {
       var page = new Seota.Page(data);
       page.render($("#details"));
+      $(".density.below_1_percent").hide();
     });
   });
 

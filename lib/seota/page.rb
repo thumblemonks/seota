@@ -2,12 +2,15 @@ require 'whyvalidationssuckin96'
 
 module Seota
   class Page
+    include Seota::Wordable
+
     attr_reader :uri
     include WhyValidationsSuckIn96::ValidationSupport
 
     setup_validations do
       validates_presence_of :title, :description
       validates_presence_of :keywords, :message => "were not present"
+      validates_length_of :title, :maximum => 64, :message => "should probably be 64 characters or less"
       validates_length_of :description, :maximum => 160, :message => "should be no more than 160 characters"
     end
 
@@ -49,7 +52,7 @@ module Seota
     def document; @document ||= Nokogiri::HTML(uri.open); end
 
     def get_words
-      @words ||= document.css("body").inner_text.gsub(/\W/i, ' ').gsub(/ +/, ' ').strip.split
+      @words ||= parse_words(document.css("body").inner_text)
     end
 
     def read_meta_attribute(name, attribute_name)
