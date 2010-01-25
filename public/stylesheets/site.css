@@ -1,0 +1,9 @@
+#content #details .key_value {
+  padding-bottom: 1ex;
+  border-bottom: 1px dotted #cccccc;
+}
+#content #details label {
+  padding: 1ex 0;
+  display: block;
+  font-weight: bold;
+}

@@ -21,7 +21,8 @@ module Seota
       page = Page.new("http://#{domain}/#{path}")
       content_type 'application/json', :charset => 'utf-8'
       {:title => page.title, :description => page.description, :keywords => page.keywords,
-        :single_word_density => page.single_word_density}.to_json
+        :single_word_density => page.single_word_density,
+        :double_word_density => page.double_word_density}.to_json
     end
   end # App
 end
