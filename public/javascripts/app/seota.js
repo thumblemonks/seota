@@ -1,10 +1,13 @@
 Seota = {};
 
 var app = $.sammy(function() {
-  this.bind("run", function() { $.ajaxSetup({ "async": false }); });
+  this.bind("run", function() {
+    $.ajaxSetup({ "async": false });
+  });
 
   this.bind("reset", function() {
     $("#sitemap").removeData("current-domain");
+    $("#details").data("pages", {});
     $("#sitemap ul, #details").text("");
   });
 
@@ -31,11 +34,16 @@ var app = $.sammy(function() {
     var domain = this.params["splat"][0];
     var path = this.params["splat"][1];
     this.trigger("load-sitemap", domain);
-    $.getJSON("/analyze/" + domain + "/page/" + path, function(data) {
-      var page = new Seota.Page(data);
-      page.render($("#details"));
-      $(".density.below_1_percent").hide();
-    });
+    var details_div = $("#details");
+    var page = details_div.data("pages")[path];
+    if (!page) {
+      $.getJSON("/analyze/" + domain + "/page/" + path, function(data) {
+        page = new Seota.Page(data);
+        details_div.data("pages")[path] = page;
+      });
+    }
+    page.render(details_div);
+    $(".density.below_1_percent").hide();
   });
 });
 
