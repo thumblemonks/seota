@@ -13,5 +13,4 @@ Either by walking the sitemap or by crawling pages
 * Keywords
 * Single word density
 * Double word density
-* Triple word density?
 * Check for broken links
