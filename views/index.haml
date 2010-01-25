@@ -1,0 +1,32 @@
+!!! XML
+
+%html
+  %head
+    %title Seota - SEO Freedom
+    %link{:name => "description", :content => "A free online tool which lets you analyze a site for SEO opportunities"}/
+    %link{:name => "keywords", :content => "seo, online tool, analyze, free"}/
+    %link{:rel => "stylesheet", :href => "/stylesheets/base.css", :type => "text/css", :media => "screen", :charset =>"utf-8"}/
+    %link{:rel => "stylesheet", :href => "/stylesheets/site.css", :type => "text/css", :media => "screen", :charset =>"utf-8"}/
+  %body
+    .container_16
+      #header.grid_16.alpha.omega
+        Seota
+        %form#go_seota
+          %input#domain_name.input_prompt{:type => "text", :value => "www.domain.name"}/
+          %input.button.slate.medium{:type => "submit", :value => "Analyze"}/
+
+      #content.grid_16.alpha.omega
+        #sitemap.grid_4.alpha
+          Sitemap
+        #details.grid_12.omega
+          Site/Page Details
+
+      #footer.grid_16.alpha.omega
+        &copy;
+        = Time.now.year
+
+    %script{:src => "/javascripts/jquery-1.4.min.js"}
+    %script{:src => "/javascripts/app/seota.js"}
+    %script{:src => "/javascripts/tracking.js"}
+  </body>
+</html>
