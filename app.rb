@@ -9,8 +9,12 @@ module Seota
 
     get("/") { haml(:index) }
 
-    get "/site/:domain" do
-      "hello"
+    get %r{^/analyze/([\w.-]+)$} do |domain|
+      "foo #{domain}"
+    end
+
+    get %r{^/analyze/([\w.-]+)/page/(.+)$} do |domain, path|
+      "bar #{domain}/#{path}"
     end
   end # App
 end
