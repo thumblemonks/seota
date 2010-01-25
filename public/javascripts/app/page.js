@@ -23,15 +23,35 @@ Seota.Page.prototype = $.extend({}, {
     return this._labeled_tag("keywords", "Keywords", this.details.keywords);
   },
 
+  _density_sum: function(collection) {
+    var sum = 0;
+    for(word in collection) { sum += collection[word]; }
+    return sum;
+  },
+
+  _density_sort: function(collection) {
+    var sorted = [];
+    for(word in collection) { sorted.push([word, collection[word]]); }
+    return sorted.sort(function(a, b) { return(b[1] - a[1]); });
+  },
+
   _word_density: function(class, label, collection) {
     var words_div = $("<div class='grid_6'>").addClass(class);
-    words_div.append($("<label>").text(label));
-    for(word in collection) {
-      var density_div = $("<div class='density'>");
-      density_div.append($("<div class='grid_4 alpha'>").text(word));
-      density_div.append($("<div class='grid_2 omega'>").text(collection[word]));
+    words_div.append($("<label></label>").text(label));
+    var sum = this._density_sum(collection);
+    var total_div = $("<div></div>").addClass("density total clearfix").
+      append($("<div class='grid_3 alpha word'></div>").text("Total")).
+      append($("<div class='grid_2 percent'></div>").text("100.00")).
+      append($("<div class='grid_1 omega count'></div>").text(sum));
+    words_div.append(total_div);
+    $.each(this._density_sort(collection), function(i, word_and_count) {
+      var percent = ((word_and_count[1] / sum) * 100).toPrecision(3);
+      var density_div = $("<div></div>").addClass("density clearfix").
+        append($("<div class='grid_3 alpha word'></div>").text(word_and_count[0])).
+        append($("<div class='grid_2 percent'></div>").text(percent)).
+        append($("<div class='grid_1 omega count'></div>").text(word_and_count[1]));
       words_div.append(density_div);
-    }
+    });
     return words_div;
   },
 

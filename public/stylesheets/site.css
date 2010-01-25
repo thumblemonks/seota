@@ -7,3 +7,12 @@
   display: block;
   font-weight: bold;
 }
+#content #details .density { border-bottom: 1px dotted #dddddd; }
+#content #details .density .percent { text-align: right; }
+#content #details .density .percent:after { content: '%'; }
+#content #details .density .count { text-align: center; }
+#content #details .density.total {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+#content #details .density.total .word { text-transform: uppercase; }
