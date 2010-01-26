@@ -6,7 +6,7 @@ require "seota"
 module Seota
   class App < Sinatra::Base
     set :root, File.dirname(__FILE__)
-    enable :dump_errors
+    # enable :dump_errors
     enable :static
 
     get("/") { haml(:index) }
