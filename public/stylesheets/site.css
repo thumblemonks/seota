@@ -199,6 +199,16 @@ a.button:hover { text-decoration: none; }
 }
 #content #navigation ul li:last-child { border-bottom: 0; }
 #content #navigation ul li:hover { background-color: #fafafa; }
+#content #navigation form {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+#content #navigation form #page_filter {
+  padding: 0.25ex 1ex;
+  width: 100%;
+  border-width: 1px;
+}
 #content #details {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;

@@ -8,7 +8,7 @@ Seota.Sitemap.prototype = $.extend({}, {
     var that = this;
     $.each(that.pages, function(i, path) {
       var link = $("<a>").attr("href", "#/analyze/" + that.domain + "/page/" + path).text(path);
-      sitemap_list.append( $("<li>").append(link) );
+      sitemap_list.append( $("<li></li>").attr("data-path", path).append(link) );
     });
   }
 });

@@ -27,8 +27,10 @@ sitemap.pages.each do |page|
     puts "   Meta(description): #{page.description}"
     puts "   Meta(keywords): #{page.keywords}"
     puts "   Word Count: #{page.word_count}"
-    puts "   Single word density: #{page.single_word_density.inspect}"
-    puts "   Double word density: #{page.double_word_density.inspect}"
+    # puts "   Single word density: #{page.single_word_density.inspect}"
+    # puts "   Double word density: #{page.double_word_density.inspect}"
+    puts "   Anchors with titles: 0"
+    puts "   Anchors without titles: 0"
   else
     puts " ! Page not found: #{page.uri}"
   end

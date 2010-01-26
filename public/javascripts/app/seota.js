@@ -78,5 +78,14 @@ $(document).ready(function() {
     return false;
   });
 
+  $("#page_filter").keyup(function() {
+    var value = $(this).val();
+    $("#pages li").show();
+    if (!(value == "" || value == $(this).data("label"))) {
+      $("#pages li").hide();
+      $("#pages li[data-path*=" + $(this).val() + "]").show();
+    }
+  });
+
   app.run(); // Sammy!
 });

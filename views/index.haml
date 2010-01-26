@@ -39,8 +39,10 @@
             %ul#sitemaps.runtime
               %li Sitemap list coming soon
             %h6 Pages
+            %form.runtime
+              %input#page_filter.input_prompt{:value => "Search by path"}
             %ul#pages.runtime.clearable
-              Page list
+              Page listing
             .default.caption You need to analyze a site first :)
         .grid_12.omega
           #details.clearfix
