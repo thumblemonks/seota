@@ -1,2 +1,4 @@
 .DS_Store
 log/*.log
+deploy/production.rb
+public/javascripts/tracking.js
