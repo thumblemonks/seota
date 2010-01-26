@@ -1,6 +1,6 @@
 body {
   background-color: #edf2fb;
-  margin-bottom: 1em;
+  padding-bottom: 2em;
 }
 a {
   color: #4183c4;
@@ -161,6 +161,7 @@ a.button:hover { text-decoration: none; }
   border: 1px solid;
   border-color: transparent #bfbeaf #bfbeaf #bfbeaf;
 }
+#content { padding-bottom: 2em; }
 #content h5 {
   padding: 1ex 0;
   margin: 0;

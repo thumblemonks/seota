@@ -17,8 +17,8 @@ module Seota
       {:sitemap => sitemap.pages.map(&:path)}.to_json
     end
 
-    get %r{^/analyze/([\w.-]+)/page/(.+)$} do |domain, path|
-      page = Page.new("http://#{domain}/#{path}")
+    get %r{^/analyze/([\w.-]+)/page/(.*)$} do |domain, path|
+      page = Page.new("http://#{domain}", path)
       valid = page.valid?
       content_type 'application/json', :charset => 'utf-8'
       {:valid => valid, :uri => page.uri,

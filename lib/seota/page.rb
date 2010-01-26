@@ -18,8 +18,8 @@ module Seota
       failed_validations.select {|v| v.attribute == attribute }.map(&:message)
     end
 
-    def initialize(url)
-      @uri = URI.parse(url)
+    def initialize(*uri_parts)
+      @uri = URI.join(*uri_parts)
     end
 
     def path; uri.path.gsub(/^$/, "/"); end

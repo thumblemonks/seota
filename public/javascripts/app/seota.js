@@ -21,21 +21,26 @@ var app = $.sammy(function() {
       $.getJSON("/analyze/" + domain, function(data) {
         $(".default").hide();
         $(".runtime").show();
+
+        $("#sites").append(
+          $("<li></li>").append( $("<a></a>").attr("href", "#/analyze/" + domain).text(domain) )
+        );
+
         sitemap = new Seota.Sitemap(domain, data.sitemap);
         sitemap.render($("#pages"));
-        $("#details").text("Basic site statistics coming");
         $("#navigation").data("current-domain", domain);
       });
     }
+    $("#details").text("Basic site statistics coming");
   });
 
   this.get(/^#\/analyze\/([\w.-]+)$/, function() {
     var domain = this.params["splat"][0];
-    this.trigger('reset');
+    // this.trigger('reset');
     this.trigger("load-sitemap", domain);
   });
 
-  this.get(/^#\/analyze\/([\w.-]+)\/page\/(.+)$/, function() {
+  this.get(/^#\/analyze\/([\w.-]+)\/page\/(.*)$/, function() {
     var domain = this.params["splat"][0];
     var path = this.params["splat"][1];
     this.trigger("load-sitemap", domain);
