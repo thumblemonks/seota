@@ -98,7 +98,8 @@ Seota.Page.prototype = $.extend({}, {
 
   render: function(container) {
     container.empty();
-    container.append($("<h5></h5>").text(this.details.uri));
+    container.append(Mustache.to_html("<h5><a href='{{ uri }}' target='_blank'>{{ uri }}</a></h5>",
+      {"uri": this.details.uri}));
     if (this.details.exists) {
       var meta_div = $("<div></div>").addClass("half").
         append(this._title_tag()).append(this._description_tag()).append(this._keywords_tag());
