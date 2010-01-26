@@ -13,6 +13,8 @@
 @darkpurple: @purple - #222;
 
 body { background-color: @lightblue; }
+a, a:visited { color: @blue; text-decoration: none; }
+a:hover { text-decoration: underline; }
 
 /*
  * Sizeables
@@ -60,6 +62,7 @@ body { background-color: @lightblue; }
 
 .shadow_text { text-shadow: 1px 1px 2px rgba(0, 0, 0, .5); }
 .shadow_text_tight { text-shadow: 1px 1px 1px rgba(0, 0, 0, .5); }
+.shadow_text_light { text-shadow: 1px 1px 2px rgba(255, 255, 255, 1); }
 
 .border_3d {
   border-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.25);
@@ -99,7 +102,13 @@ input { font: @font_base; .rounded_tight; }
  */
 
 #header {
-  padding: .25ex 0; font-size: 200%; color: #222; .shadow_text;
+  padding: .5ex 0; color: #222;
+  #logo { font-size: 200%; .shadow_text; }
+  #slogan { padding-left: 1em; .shadow_text_tight; }
+  #shameless {
+    padding-left: 5em; color: @blue - #111; .shadow_text_light;
+    a, a:visited { text-decoration: underline; }
+  }
 }
 
 #choose_domain {

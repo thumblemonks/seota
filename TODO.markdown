@@ -1,7 +1,8 @@
 # Per site
 
+* Look for sitemap in robots.txt before falling back to sitemap.xml, then sitemap.txt
 * Check for sitemap(s)
-* Google search on "site:<hostname>"
+* Google search on "site:<hostname>" for user
 * Look for pages not listed in the sitemap?
 
 # Per page
