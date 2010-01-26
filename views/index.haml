@@ -25,15 +25,20 @@
             %input.button.purple.small{:type => "submit", :value => "Analyze"}/
             %a.button.purple.small{:href => "/"} Reset
         #domain_info
-          Information about this domain
+          Don't have a site to analyze? Why not
+          %a{:href => "#/seota.thumblemonks.com"} analyze this site
+          \:)
 
       #content.grid_16.alpha.omega
         .grid_4.alpha
-          #sitemap
-            %h5 Pages
-            .default
-              .caption You need to analyze a site first :)
-            %ol.runtime
+          #navigation
+            %h6 Sitemaps
+            %ul#sitemaps.runtime
+              %li Sitemap list coming soon
+            %h6 Pages
+            %ul#pages.runtime.clearable
+              Page list
+            .default.caption You need to analyze a site first :)
         .grid_12.omega
           #details.clearfix
             .default
@@ -118,10 +123,11 @@
                 Still to come for Seota are many, many checks. We have a lot in mind, but we love for you to
                 let us know what you would like added. This tool is your tool. TBD: how to get ahold of us.
                 Keep an eye on our
-                %a{:href => "http://jubilator.thumblemonks.com/#/thumblemonks/seota/blob/e4fdeb8e4fb7c241b77c434920c758c111df210a/TODO.markdown"} TODO
+                %a{:href => "http://github.com/thumblemonks/seota/blob/master/TODO.markdown"} TODO
                 for features we think we want to add.
 
-            .runtime
+            .runtime.clearable
+              Details of things
 
     %script{:src => "/javascripts/jquery-1.4.min.js"}
     %script{:src => "/javascripts/sammy.js"}

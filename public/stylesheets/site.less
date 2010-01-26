@@ -135,16 +135,19 @@ a.button {
 }
 
 #content {
-  h5 { padding: 0 0 1ex 0; margin: 0; }
+  h5 { padding: 1ex 0; margin: 0; }
+  h6 { padding: .5ex 0; margin: 0; }
   .caption { padding: .5ex 0; font-size: 90%; font-style: italic; color: @slate; }
 
-  #sitemap {
+  #navigation {
     .rounded_tight; background-color: white; border: 1px solid @gray;
     padding: 1ex; .offset_shadow;
     font-size: 90%;
-    ol {
-      margin: 0 0 0 1ex; padding: 0 0 0 1.5em;
-      li { margin: 0; padding: 0; }
+    ul {
+      margin: 0; padding: 0; list-style-type: none;
+      li { margin: 0; padding: .25ex; border-bottom: 1px dotted #ccc; }
+      li:last-child { border-bottom: 0; }
+      li:hover { background-color: #fafafa; }
     }
   }
   #details {

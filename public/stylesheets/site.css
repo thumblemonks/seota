@@ -162,7 +162,11 @@ a.button:hover { text-decoration: none; }
   border-color: transparent #bfbeaf #bfbeaf #bfbeaf;
 }
 #content h5 {
-  padding: 0 0 1ex 0;
+  padding: 1ex 0;
+  margin: 0;
+}
+#content h6 {
+  padding: 0.5ex 0;
   margin: 0;
 }
 #content .caption {
@@ -171,7 +175,7 @@ a.button:hover { text-decoration: none; }
   font-style: italic;
   color: #666666;
 }
-#content #sitemap {
+#content #navigation {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -182,14 +186,18 @@ a.button:hover { text-decoration: none; }
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
   font-size: 90%;
 }
-#content #sitemap ol {
-  margin: 0 0 0 1ex;
-  padding: 0 0 0 1.5em;
-}
-#content #sitemap ol li {
+#content #navigation ul {
   margin: 0;
   padding: 0;
+  list-style-type: none;
 }
+#content #navigation ul li {
+  margin: 0;
+  padding: 0.25ex;
+  border-bottom: 1px dotted #cccccc;
+}
+#content #navigation ul li:last-child { border-bottom: 0; }
+#content #navigation ul li:hover { background-color: #fafafa; }
 #content #details {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;

@@ -2,26 +2,29 @@ Seota = {};
 
 var app = $.sammy(function() {
   this.bind("run", function() {
+    $(".runtime").hide();
     $.ajaxSetup({ "async": false });
   });
 
   this.bind("reset", function() {
-    $("#sitemap").removeData("current-domain");
+    $("#navigation").removeData("current-domain"); // TODO: Move navigation stuff into it's own container
     $("#details").data("pages", {});
     $(".default").show();
-    $(".runtime").text("");
+    $(".runtime").hide();
+    $(".runtime.clearable").text("");
   });
 
   this.bind("load-sitemap", function(evt, domain) {
-    var current_domain = $("#sitemap").data("current-domain");
+    var current_domain = $("#navigation").data("current-domain");
     if (!current_domain || domain != current_domain) {
       this.trigger('reset');
       $.getJSON("/analyze/" + domain, function(data) {
         $(".default").hide();
+        $(".runtime").show();
         sitemap = new Seota.Sitemap(domain, data.sitemap);
-        sitemap.render($("#sitemap ol"));
-        $("#details").text("yup yup");
-        $("#sitemap").data("current-domain", domain);
+        sitemap.render($("#pages"));
+        $("#details").text("Basic site statistics coming");
+        $("#navigation").data("current-domain", domain);
       });
     }
   });
