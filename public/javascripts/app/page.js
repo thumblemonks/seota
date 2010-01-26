@@ -100,7 +100,7 @@ Seota.Page.prototype = $.extend({}, {
     container.empty();
     var meta_div = $("<div></div>").addClass("half").
       append(this._title_tag()).append(this._description_tag()).append(this._keywords_tag());
-    container.append(meta_div);
-    container.append($("<div></div>").addClass("half").append(this._densities_tag()));
+    container.append($("<h5></h5>").text(this.details.uri)).
+      append(meta_div).append($("<div></div>").addClass("half").append(this._densities_tag()));
   }
 });

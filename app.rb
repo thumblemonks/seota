@@ -21,7 +21,7 @@ module Seota
       page = Page.new("http://#{domain}/#{path}")
       valid = page.valid?
       content_type 'application/json', :charset => 'utf-8'
-      {:valid => valid,
+      {:valid => valid, :uri => page.uri,
         :title => {:value => page.title, :failures => page.failures_on(:title)},
         :description => {:value => page.description, :failures => page.failures_on(:description)},
         :keywords => {:value => page.keywords, :failures => page.failures_on(:keywords)},

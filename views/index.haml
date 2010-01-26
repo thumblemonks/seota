@@ -2,8 +2,8 @@
 
 %html
   %head
-    %title Automated SEO Checklist for Your Site
-    %link{:name => "description", :content => "Analyze your site for SEO opportunities in an instant. No need for outside agencies."}/
+    %title Semi-automatic SEO Checklist for Your Site
+    %link{:name => "description", :content => "Analyze your site for SEO opportunities in an instant. No need for outside agencies!"}/
     %link{:name => "keywords", :content => "seo, online tool, analyze, free"}/
     %link{:rel => "stylesheet", :href => "/stylesheets/base.css", :type => "text/css", :media => "screen", :charset =>"utf-8"}/
     %link{:rel => "stylesheet", :href => "/stylesheets/site.css", :type => "text/css", :media => "screen", :charset =>"utf-8"}/
@@ -12,7 +12,7 @@
       .grid_16.alpha.omega
         #header
           %span#logo Seota
-          %span#slogan The Automated SEO Checklist for Your Site
+          %span#slogan The Semi-automatic SEO Checklist for Your Site
           %span#shameless
             Another project brought to you by the
             %a{:href => "http://github.com/thumblemonks", :title => "Choosey marketers choose Thumble Monks"} Thumble Monks
@@ -23,22 +23,102 @@
           %form#go_seota
             %input#domain_name.input_prompt{:type => "text", :value => "www.domain.name"}/
             %input.button.purple.small{:type => "submit", :value => "Analyze"}/
+            %a.button.purple.small{:href => "/"} Reset
         #domain_info
           Information about this domain
 
       #content.grid_16.alpha.omega
         .grid_4.alpha
           #sitemap
-            %ol
-              Sitemap listing
+            %h5 Pages
+            .default
+              .caption You need to analyze a site first :)
+            %ol.runtime
         .grid_12.omega
           #details.clearfix
-            Site/Page Details
+            .default
+              %h5 Welcome to Seota
+              %p
+                The goal of Seota is to help you understand your website or sites from an SEO perspective.
+                What is meant by SEO is not always clear. In general SEO is the process of tailoring the
+                content and meta-content of your site so that search engines can more "accurately"
+                promote links to your site when users search for relevant and related keywords. Undoubtedly,
+                many people will disagree with this assertion and that's okay. It's likely that these people
+                want to ascribe more responsibility to the mechanics of SEO, but at Thumble Monks we tend to
+                think of any broadening of this term to be entering into the realm of internet marketing
+                at-large. SEO is a marketing tactic, not the other way around.
+              
+              %p
+                To being using Seota, simply provide a domain name in the entry box above labeled
+                "Enter Domain". Once you click Analyze, Seota will start by searching for the sitemap or
+                sitemaps associated with the site. Seota will try to find a sitemap using the following
+                heuristics:
+                
+                %ol
+                  %li
+                    Check the
+                    %a{:href => "http://en.wikipedia.org/wiki/Robots_exclusion_standard"} robots.txt
+                    file for
+                    %code Sitemap
+                    entries
+                  %li
+                    If no
+                    %code robots.txt
+                    file or
+                    %code Sitemap
+                    entries defined within one, look for a
+                    %code sitemap.xml
+                    file
+                  %li
+                    If no
+                    %code sitemap.xml
+                    file, look for a
+                    %code sitemap.txt
+                    file
+                
+                If no sitemap can be found, Seota will not move on; thus, hinting at a problem about your
+                site from an SEO perspective. When Seota does have a Sitemap to work with, it will allow you
+                to analyze each of the pages listed within it on a case-by-case basis.
+              
+              %h6 Analyzing a Page
+              
+              %p
+                Page analysis consists of the following checks:
+                
+              %ul
+                %li
+                  Check for presence and length of the
+                  %a{:href => "http://www.w3schools.com/TAGS/tag_title.asp"} title
+                  tag
+                %li
+                  Check for presence and length of the
+                  %a{:href => "http://www.w3schools.com/tags/tag_meta.asp"} description
+                  META tag
+                %li
+                  Check for presence and length of the
+                  %a{:href => "http://www.w3schools.com/tags/tag_meta.asp"} keywords
+                  META tag
+                %li
+                  A listing of links not including the
+                  %code title
+                  attribute
+                %li
+                  A listing of images not including the
+                  %code alt
+                  attribute
+                %li
+                  Allow you to see the keyword density of words showing up in the content more than 1% of
+                  the time*
+                %li
+                  Allow you to see the keyword density of to conjoining words showing up in the content
+                  more than 1% of the time*
+                .caption * - Seota will exclude many of the most common words before calculating density
+              
+              %p
+                Still to come for Seota are many, many checks. We have a lot in mind, but we love for you to
+                let us know what you would like added. This tool is your tool. TBD: how to get ahold of us.
 
-      #footer.grid_16.alpha.omega
-        &copy;
-        = Time.now.year
-        \- Thumble Monks (Justin Knowlden)
+            .runtime
 
     %script{:src => "/javascripts/jquery-1.4.min.js"}
     %script{:src => "/javascripts/sammy.js"}
