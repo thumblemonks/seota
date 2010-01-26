@@ -3,6 +3,8 @@ Seota.Page = function(details) {
 };
 
 Seota.Page.prototype = $.extend({}, {
+  // Meta information rendering
+
   _labeled_tag: function(class, label, field) {
     var template = "<div class='key_value {{ class }}'>" +
         "<label>{{ label }}</label>" +
@@ -26,6 +28,8 @@ Seota.Page.prototype = $.extend({}, {
     return this._labeled_tag("keywords", "Keywords", this.details.keywords);
   },
 
+  // Density rendering
+
   _density_sum: function(collection) {
     var sum = 0;
     for(word in collection) { sum += collection[word]; }
@@ -41,21 +45,20 @@ Seota.Page.prototype = $.extend({}, {
   _density_tag: function(class, word, percent, count) {
     var percent_class = percent < 1.00 ? "below_1_percent" : "1_percent";
     var template = "<div class='density clearfix {{ class }}'>" +
-        "<div class='grid_3 alpha word'>{{ word }}</div>" +
-        "<div class='grid_2 percent'>{{ percent }}</div>" +
-        "<div class='grid_1 omega count'> {{ count }}</div>" +
+        "<div class='half word'>{{ word }}&nbsp;</div>" +
+        "<div class='quarter percent'>{{ percent }}</div>" +
+        "<div class='quarter omega count'> {{ count }}</div>" +
       "</div>";
     return $(Mustache.to_html(template,
       {"class" : [class, percent_class].join(" "), "word" : word, "percent" : percent, "count" : count}
     ));
   },
 
-  _word_density: function(class, label, collection) {
+  _word_density: function(class, collection) {
     var that = this;
-    var words_div = $("<div class='grid_6'></div>").addClass(class);
-    words_div.append($("<label></label>").text(label));
+    var words_div = $("<div></div>").addClass(class);
     var sum = that._density_sum(collection);
-    words_div.append(that._density_tag("total", "Total", "100.00", sum));
+    words_div.append(that._density_tag("total", "", "100.00", sum));
     $.each(that._density_sort(collection), function(i, word_and_count) {
       var percent = ((word_and_count[1] / sum) * 100).toPrecision(3);
       words_div.append(that._density_tag("line", word_and_count[0], percent, word_and_count[1]));
@@ -64,21 +67,40 @@ Seota.Page.prototype = $.extend({}, {
   },
 
   _single_word_density_tag: function() {
-    return this._word_density("single_word_density alpha", "Single Word Density",
-      this.details.single_word_density);
+    return this._word_density("single_word_density alpha", this.details.single_word_density);
   },
 
   _double_word_density_tag: function() {
-    return this._word_density("double_word_density omega", "Double Word Density",
-      this.details.double_word_density);
+    return this._word_density("double_word_density omega", this.details.double_word_density);
   },
+
+  _densities_tag: function() {
+    var toggle_density = function() {
+      $(".density_button.selected").removeClass("selected").data("table").hide();
+      $(this).addClass("selected").data("table").show();
+    };
+
+    var single_word_table = this._single_word_density_tag();
+    var single_word_button = $("<label>Single Word Density</label>").
+      addClass("density_button selected").data("table", single_word_table).click(toggle_density);
+
+    var double_word_table = this._double_word_density_tag().hide();
+    var double_word_button = $("<label>Double Word Density</label>").
+      addClass("density_button").data("table", double_word_table).click(toggle_density);
+
+    var caption = $("<div></div>").addClass("caption").text("Only showing word(s) with density above 1%");
+
+    return $("<div></div>").addClass("densities").append(single_word_button).append(double_word_button).
+      append(single_word_table).append(double_word_table).append(caption);
+  },
+
+  // Main render
 
   render: function(container) {
     container.empty();
-    container.append(this._title_tag());
-    container.append(this._description_tag());
-    container.append(this._keywords_tag());
-    container.append(this._single_word_density_tag());
-    container.append(this._double_word_density_tag());
+    var meta_div = $("<div></div>").addClass("half").
+      append(this._title_tag()).append(this._description_tag()).append(this._keywords_tag());
+    container.append(meta_div);
+    container.append($("<div></div>").addClass("half").append(this._densities_tag()));
   }
 });

@@ -1,4 +1,12 @@
 body { background-color: #edf2fb; }
+.half {
+  float: left;
+  width: 50%;
+}
+.quarter {
+  float: left;
+  width: 25%;
+}
 .rounded_corners {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -145,6 +153,12 @@ input {
   -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
 }
+#content #details .caption {
+  padding: 0.5ex 0;
+  font-size: 90%;
+  font-style: italic;
+  color: #666666;
+}
 #content #details .failures { color: #cc0000; }
 #content #details label {
   padding: 1ex 0;
@@ -153,12 +167,36 @@ input {
 }
 #content #details .key_value { border-bottom: 1px dotted #cccccc; }
 #content #details .key_value .value { padding: 0.5ex 0 1ex 0; }
-#content #details .density { border-bottom: 1px dotted #dddddd; }
-#content #details .density .percent { text-align: right; }
-#content #details .density .percent:after { content: '%'; }
-#content #details .density .count { text-align: center; }
-#content #details .density.total {
-  background-color: #f5f5f5;
+#content #details .densities { padding-left: 1em; }
+#content #details .densities .density_button {
+  display: inline-block;
+  padding: 1ex;
+  color: #cccccc;
+}
+#content #details .densities .density_button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#content #details .densities .density_button.selected {
+  color: #000000;
+  background-color: #fffeef;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  border: 1px solid #eeedde;
+  border-bottom: 0;
+}
+#content #details .densities .density_button.selected:hover {
+  text-decoration: none;
+  cursor: default;
+}
+#content #details .densities .density { border-bottom: 1px dotted #dddddd; }
+#content #details .densities .density .percent { text-align: right; }
+#content #details .densities .density .percent:after { content: '%'; }
+#content #details .densities .density .count { text-align: center; }
+#content #details .densities .density.total {
+  background-color: #fffeef;
   font-weight: bold;
 }
-#content #details .density.total .word { text-transform: uppercase; }
+#content #details .densities .density.total .word { text-transform: uppercase; }
