@@ -1,22 +1,32 @@
 module Seota
-  class Sitemap
-    # TODO: gz sitemap files and sitemap indexes
-    attr_reader :path
+  class UnprocessableSitemap < Exception; end
 
-    def initialize(site)
-      # TODO: may convert these conditions to individual modules
-      if @path = site.resource_exists?("/sitemap.xml")
-        sitemap = Nokogiri::XML(open(site.resource(path)))
-        @pages = sitemap.search("urlset url loc").map { |loc| loc.content }
-      elsif @path = site.resource_exists?("/sitemap.txt")
-        @pages = []
+  module XmlSitemapSupport
+    def page_urls
+      @page_urls ||= find_page_urls
+    end
+  private
+    def find_page_urls
+      document = Nokogiri::XML(body)
+      document.search("urlset url loc").map { |loc| loc.content }
+    end
+  end # XmlSitemapSupport
+
+  class Sitemap < Resource
+    
+    # TODO: gz sitemap files and sitemap indexes
+
+    def initialize(url)
+      super(url)
+      puts self["content-type"]
+      if self["content-type"] =~ /\/xml$/
+        (class << self; self; end).instance_eval { include XmlSitemapSupport }
       end
     end
 
-    def pages
-      (@pages || []).map { |page_url| Page.new(page_url) }
+    def page_urls
+      raise UnprocessableSitemap, "Unable to determine format of #{url}"
     end
-
-    def found?; !@path.nil?; end
   end # Sitemap
+
 end # Seota

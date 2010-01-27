@@ -14,7 +14,7 @@ var app = $.sammy(function() {
     $(".runtime.clearable").text("");
   });
 
-  this.bind("load-sitemap", function(evt, domain) {
+  this.bind("load-site", function(evt, domain) {
     var current_domain = $("#navigation").data("current-domain");
     if (!current_domain || domain != current_domain) {
       this.trigger('reset');
@@ -22,16 +22,24 @@ var app = $.sammy(function() {
         $(".default").hide();
         $(".runtime").show();
 
+        $("#sites").empty();
         $("#sites").append(
           $("<li></li>").append( $("<a></a>").attr("href", "#/analyze/" + domain).text(domain) )
         );
 
-        sitemap = new Seota.Sitemap(domain, data.sitemap);
-        sitemap.render($("#pages"));
+        sitemap = new Seota.Site(domain, data.sitemaps);
+        sitemap.render($("#sitemaps"));
         $("#navigation").data("current-domain", domain);
       });
     }
     $("#details").text("Basic site statistics coming");
+  });
+
+  this.bind("load-sitemap", function(evt, request) {
+    $.getJSON("/analyze/" + request.domain + "/sitemap/" + request.url, function(data) {
+      var sitemap = new Seota.Sitemap(request.domain, data.pages);
+      sitemap.render($("#pages"));
+    });
   });
 
   this.bind("load-page", function(evt, request) {
@@ -49,14 +57,21 @@ var app = $.sammy(function() {
 
   this.get(/^#\/analyze\/([\w.-]+)$/, function() {
     var domain = this.params["splat"][0];
-    this.trigger("load-sitemap", domain);
-    this.trigger("load-page", {"domain": domain, "path": "/"});
+    this.trigger("load-site", domain);
+    // this.trigger("load-page", {"domain": domain, "path": "/"});
+  });
+
+  this.get(/^#\/analyze\/([\w.-]+)\/sitemap\/(.*)$/, function() {
+    var domain = this.params["splat"][0];
+    var url = this.params["splat"][1];
+    this.trigger("load-site", domain);
+    this.trigger("load-sitemap", {"domain": domain, "url": url});
   });
 
   this.get(/^#\/analyze\/([\w.-]+)\/page\/(.*)$/, function() {
     var domain = this.params["splat"][0];
     var path = this.params["splat"][1];
-    this.trigger("load-sitemap", domain);
+    this.trigger("load-site", domain);
     this.trigger("load-page", {"domain": domain, "path": path});
   });
 });

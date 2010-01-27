@@ -100,12 +100,8 @@ Seota.Page.prototype = $.extend({}, {
     container.empty();
     container.append(Mustache.to_html("<h5><a href='{{ uri }}' target='_blank'>{{ uri }}</a></h5>",
       {"uri": this.details.uri}));
-    if (this.details.exists) {
-      var meta_div = $("<div></div>").addClass("half").
-        append(this._title_tag()).append(this._description_tag()).append(this._keywords_tag());
-      container.append(meta_div).append($("<div></div>").addClass("half").append(this._densities_tag()));
-    } else {
-      container.append($("<p></p>").text("Page could not be found"));
-    }
+    var meta_div = $("<div></div>").addClass("half").
+      append(this._title_tag()).append(this._description_tag()).append(this._keywords_tag());
+    container.append(meta_div).append($("<div></div>").addClass("half").append(this._densities_tag()));
   }
 });

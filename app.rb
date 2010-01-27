@@ -9,28 +9,40 @@ module Seota
     # enable :dump_errors
     enable :static
 
-    get("/") { haml(:index) }
+    before do
+      content_type 'application/json', :charset => 'utf-8'
+    end
+
+    error UnusableResource do
+      status 427
+      {:error => request.env['sinatra.error'].message}.to_json
+    end
+
+    get("/") do
+      content_type 'text/html', :charset => 'utf-8'
+      haml(:index)
+    end
+
+    get %r{^/analyze/([\w.-]+)/sitemap/(.*)$} do |domain, url|
+      sitemap = Sitemap.new(url)
+      {:pages => sitemap.page_urls}.to_json
+    end
+
+    get %r{^/analyze/([\w.-]+)/page/(.*)$} do |domain, url|
+      page = Page.new(url)
+      {:uri => page.uri, :valid => page.valid?,
+        :title => {:value => page.title, :failures => page.failures_on(:title)},
+        :description => {:value => page.description, :failures => page.failures_on(:description)},
+        :keywords => {:value => page.keywords, :failures => page.failures_on(:keywords)},
+        :single_word_density => page.single_word_density,
+        :double_word_density => page.double_word_density
+      }.to_json
+    end
 
     get %r{^/analyze/([\w.-]+)$} do |domain|
-      sitemap = Sitemap.new(Site.new("http://#{domain}"))
-      content_type 'application/json', :charset => 'utf-8'
-      {:sitemap => sitemap.pages.map(&:path)}.to_json
+      site = Site.new("http://#{domain}")
+      {:sitemaps => site.sitemaps.map(&:url)}.to_json
     end
 
-    get %r{^/analyze/([\w.-]+)/page/(.*)$} do |domain, path|
-      page = Page.new("http://#{domain}", path)
-      content_type 'application/json', :charset => 'utf-8'
-      result = {:uri => page.uri, :exists => page.exists?, :valid => false}
-      if page.exists?
-        result = result.merge({:valid => page.valid?,
-          :title => {:value => page.title, :failures => page.failures_on(:title)},
-          :description => {:value => page.description, :failures => page.failures_on(:description)},
-          :keywords => {:value => page.keywords, :failures => page.failures_on(:keywords)},
-          :single_word_density => page.single_word_density,
-          :double_word_density => page.double_word_density
-        })
-      end
-      result.to_json
-    end
   end # App
 end

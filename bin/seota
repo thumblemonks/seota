@@ -13,25 +13,34 @@ puts "Preparing to analyze #{site.base_uri}"
 #
 # Collection page urls from sitemap
 
-sitemap = Seota::Sitemap.new(site)
-(puts " ! No sitemap found"; exit(1)) unless sitemap.found?
-puts " + Using sitemap: #{sitemap.path}"
+robots = nil
+
+begin
+  robots = Seota::Robots.new(site)
+  # robots.sitemaps.each do |sitemap|
+  #   puts " + Using sitemap: #{sitemap.url}"
+  # end
+rescue Seota::NoRobotsFound
+  puts " ! No robots.txt found"
+  exit(1)
+end
 
 #
 # Analyze each page
-
-sitemap.pages.each do |page|
-  if page.exists?
-    puts " > #{page.uri}"
-    puts "   Title: #{page.title}"
-    puts "   Meta(description): #{page.description}"
-    puts "   Meta(keywords): #{page.keywords}"
-    puts "   Word Count: #{page.word_count}"
-    # puts "   Single word density: #{page.single_word_density.inspect}"
-    # puts "   Double word density: #{page.double_word_density.inspect}"
-    puts "   Anchors with titles: 0"
-    puts "   Anchors without titles: 0"
-  else
-    puts " ! Page not found: #{page.uri}"
-  end
-end # sitemap_resource
+robots.sitemaps.each do |sitemap|
+  puts " + Using sitemap: #{sitemap.url}"
+  sitemap.pages.each do |page|
+    if page.exists?
+      puts " > #{page.uri}"
+      puts "   Title: #{page.title}"
+      puts "   Meta(description): #{page.description}"
+      puts "   Meta(keywords): #{page.keywords}"
+      # puts "   Single word density: #{page.single_word_density.inspect}"
+      # puts "   Double word density: #{page.double_word_density.inspect}"
+      puts "   Anchors with titles: 0"
+      puts "   Anchors without titles: 0"
+    else
+      puts " ! Page not found: #{page.uri}"
+    end
+  end # sitemap.pages
+end

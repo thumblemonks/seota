@@ -196,6 +196,7 @@ a.button:hover { text-decoration: none; }
   margin: 0;
   padding: 0.25ex;
   border-bottom: 1px dotted #cccccc;
+  overflow: hidden;
 }
 #content #navigation ul li:last-child { border-bottom: 0; }
 #content #navigation ul li:hover { background-color: #fafafa; }
