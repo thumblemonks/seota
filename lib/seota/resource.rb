@@ -42,5 +42,15 @@ module Seota
     def replace_path(new_path)
       uri.to_s.sub(%r[#{uri.path}$], new_path)
     end
+
+    def base_url
+      uri.to_s.sub(%r[#{uri.path}$], "")
+    end
+
+    def make_url(a_url)
+      a_uri = URI.parse(a_url)
+      a_url = replace_path(a_url) unless a_uri.kind_of?(URI::HTTP)
+      a_url
+    end
   end # Resource
 end # Seota

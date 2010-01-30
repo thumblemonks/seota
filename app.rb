@@ -1,10 +1,26 @@
 require "sinatra"
 require "haml"
 require "json"
+require "animalcracker"
 require "seota"
 
 module Seota
   class App < Sinatra::Base
+    #
+    # Asset stuff. Do I move this to it's own app?
+
+    register AnimalCracker::Server
+
+    get_assets "/assets"
+
+    configure do
+      asset_path = File.join(File.dirname(__FILE__), "assets")
+      AnimalCracker::AssetHost.configure("asset_path" => asset_path)
+    end
+
+    #
+    # Main stuff
+
     set :root, File.dirname(__FILE__)
     # enable :dump_errors
     enable :static
